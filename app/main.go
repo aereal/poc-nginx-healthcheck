@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"time"
 
 	"github.com/aereal/poc-nginx-healthcheck/web"
 )
@@ -71,7 +70,6 @@ func handler() http.Handler {
 func handleWithStatus(f http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if !Up {
-			time.Sleep(30 * time.Second)
 			unavailableHandler(w, r)
 		} else {
 			f(w, r)
